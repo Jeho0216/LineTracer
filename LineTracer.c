@@ -34,10 +34,11 @@ void Motor_stop(void){
 
 int main(void){
 	unsigned char Sensor = 0;		//Storing IR value.
-
+	unsigned char prevSenesor = 0;	//Previous IR value.
 	portInit();
 	
 	while(1){
+		prevSensor = Sensor;		//Storing Previous IR value.
 		Sensor = (~PIND) & 0x0F;	//Reading IR Sensor.
 		//Use D0 ~ D3
 		//Blackline = 1, Whiteline = 0.
@@ -52,38 +53,42 @@ int main(void){
 		switch(Sensor){
 			case 1 :		//Turn left
 			PORTG = 0x02;
-//			Motor_stop();
-//			Motor_1(MotorB);
+			if(previousSensor != Sensor)	//If the black line positions have chaged
+				Motor_stop();
+//			Motor_1(MotorB);		
 			break;
 			
 			case 3 :		//Turn left
-			PORTG = 0x02;	
-//			Motor_stop();
+			PORTG = 0x02;
+			if(previousSensor != Sensor)
+				Motor_stop();
 //			Motor_1(MotorB);
 			break;
 			
 			case 6 :		//Straight
 			PORTG = 0x03;
-//			Motor_stop();
+			if(previousSensor != Sensor)
+				Motor_stop();
 //			Motor_1(MotorB);
 //			Motor_2(MotorA);
 			break;
 			
 			case 12 :		//Turn Right
 			PORTG = 0x01;
-//			Motor_stop();
-//			Motor_2(MotorA);
+//			Motor_2(MotorB);
 			break;
 
 			case 8 :		//Turn Right
 			PORTG = 0x01;
-//			Motor_stop();
+			if(previousSensor != Sensor)
+				Motor_stop();
 //			Motor_2(MotorA);
 			break;
 			
 			default :
 			PORTG = 0x03;
-//			Motor_stop();
+			if(previousSensor != Sensor)
+				Motor_stop();
 //			Motor_1(MotorB);
 //			Motor_2(MotorA);
 			break;
