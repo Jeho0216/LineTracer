@@ -17,6 +17,20 @@ void portInit(void){	//Port Initalize.
 	DDRD = 0x00;		//Input IR value.
 }
 
+void Motor_1(int phase){		//Left Motor
+	if(phase == MotorB)	PORTE |= 0x01;
+	else				PORTE |= 0x02;
+}
+void Motor_2(int phase){		//Right Motor
+	if(phase == MotorB)	PORTE |= 0x04;
+	else				PORTE |= 0x08;
+}
+
+void Motor_stop(void){
+	PORTE = 0x00;
+	_delay_us(5);
+}
+
 int main(void){
 	unsigned char Sensor = 0;		//Storing IR value.
 
@@ -24,6 +38,7 @@ int main(void){
 	
 	while(1){
 		Sensor = (~PIND) & 0x0F;	//Reading IR Sensor.
+		PORTA = Sensor;				//Output IR Sensor value.(use LED)
 		//Use D0 ~ D3
 		//Blackline = 1, Whiteline = 0.
 		/*
@@ -36,14 +51,34 @@ int main(void){
 		*/
 		switch(Sensor){
 			case 1 :		//Turn left
+			Motor_stop();
+			Motor_1(MotorB);
 			break;
+			
 			case 3 :		//Turn left
+			Motor_stop();
+			Motor_1(MotorB);
 			break;
+			
 			case 6 :		//Straight
+			Motor_stop();
+			Motor_1(MotorB);
+			Motor_2(MotorB);
 			break;
+			
 			case 12 :		//Turn Right
+			Motor_stop();
+			Motor_2(MotorB);
 			break;
 			case 8 :		//Turn Right
+			Motor_stop();
+			Motor_2(MotorB);
+			break;
+			
+			default :
+			Motor_stop();
+			Motor_1(MotorB);
+			Motor_2(MotorB);
 			break;
 		}
 	}
