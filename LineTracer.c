@@ -51,46 +51,40 @@ int main(void){
 		1000	8		Right
 		*/
 		switch(Sensor){
+			case 0 :		//On White line.
+				Motor_stop();
+				break;
+
 			case 1 :		//Turn left
+			case 3 :		
 			PORTG = 0x02;
 			if(previousSensor != Sensor)	//If the black line positions have chaged
 				Motor_stop();
-//			Motor_1(MotorB);		
-			break;
-			
-			case 3 :		//Turn left
-			PORTG = 0x02;
-			if(previousSensor != Sensor)
-				Motor_stop();
-//			Motor_1(MotorB);
+			Motor_1(MotorB);
 			break;
 			
 			case 6 :		//Straight
 			PORTG = 0x03;
 			if(previousSensor != Sensor)
 				Motor_stop();
-//			Motor_1(MotorB);
-//			Motor_2(MotorA);
+			Motor_1(MotorB);
+			Motor_2(MotorA);
 			break;
 			
-			case 12 :		//Turn Right
-			PORTG = 0x01;
-//			Motor_2(MotorB);
-			break;
-
 			case 8 :		//Turn Right
+			case 12 :		
 			PORTG = 0x01;
 			if(previousSensor != Sensor)
 				Motor_stop();
-//			Motor_2(MotorA);
+			Motor_2(MotorA);
 			break;
 			
 			default :
 			PORTG = 0x03;
 			if(previousSensor != Sensor)
 				Motor_stop();
-//			Motor_1(MotorB);
-//			Motor_2(MotorA);
+			Motor_1(MotorB);
+			Motor_2(MotorA);
 			break;
 		}
 	}
