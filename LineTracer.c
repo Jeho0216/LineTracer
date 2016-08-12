@@ -26,14 +26,24 @@ int main(void){
 		Sensor = (~PIND) & 0x0F;	//Reading IR Sensor.
 		//Use D0 ~ D3
 		//Blackline = 1, Whiteline = 0.
+		/*
+		sensor	value	black line position
+		0001	1		Left
+		0011	3		Left
+		0110	6		Middle
+		1100	12(C)	Right
+		1000	8		Right
+		*/
 		switch(Sensor){
-			case 1 :
+			case 1 :		//Turn left
 			break;
-			case 2 :
+			case 3 :		//Turn left
 			break;
-			case 3 :
+			case 6 :		//Straight
 			break;
-			case 4 :
+			case 12 :		//Turn Right
+			break;
+			case 8 :		//Turn Right
 			break;
 		}
 	}
