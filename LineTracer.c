@@ -63,22 +63,23 @@ int main(void){
 			case 6 :		//Straight
 			Motor_stop();
 			Motor_1(MotorB);
-			Motor_2(MotorB);
+			Motor_2(MotorA);
 			break;
 			
 			case 12 :		//Turn Right
 			Motor_stop();
 			Motor_2(MotorB);
 			break;
+
 			case 8 :		//Turn Right
 			Motor_stop();
-			Motor_2(MotorB);
+			Motor_2(MotorA);
 			break;
 			
 			default :
 			Motor_stop();
 			Motor_1(MotorB);
-			Motor_2(MotorB);
+			Motor_2(MotorA);
 			break;
 		}
 	}
