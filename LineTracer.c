@@ -54,7 +54,7 @@ void Motor_stop(void){
 
 int main(void){
 	unsigned char Sensor = 0;		//Storing IR value.
-	unsigned char prevSenesor = 0;	//Previous IR value.
+	unsigned char prevSensor = 0;	//Previous IR value.
 	port_Init();
 	
 	while(1){
@@ -72,22 +72,24 @@ int main(void){
 		*/
 		switch(Sensor){
 			case 0 :		//On White line.
+			case 0x0F :
 				Motor_stop();
 				break;
 
-			case 1 :		//Turn left
-			case 3 :		
+			case 0x01 :		//Turn left
+			case 0x02 :
+			case 0x03 :		
 			PORTG = 0x02;
-			if(previousSensor != Sensor){	//If the black line positions have chaged
+			if(prevSensor != Sensor){	//If the black line positions have chaged
 				Motor_stop();
 				send_data(get_data);
 			}
 			Motor_1(MotorB);
 			break;
 			
-			case 6 :		//Straight
+			case 0x06 :		//Straight
 			PORTG = 0x03;
-			if(previousSensor != Sensor){
+			if(prevSensor != Sensor){
 				Motor_stop();
 				send_data(get_data);
 			}
@@ -95,10 +97,11 @@ int main(void){
 			Motor_2(MotorA);
 			break;
 			
-			case 12 :		//Turn Right
-			case 8 :		//Turn Right
+			case 0x04 :		
+			case 0x08 :
+			case 0x0C :
 			PORTG = 0x01;
-			if(previousSensor != Sensor){
+			if(prevSensor != Sensor){
 				Motor_stop();
 				send_data(get_data);
 			}
@@ -107,7 +110,7 @@ int main(void){
 			
 			default :
 			PORTG = 0x03;
-			if(previousSensor != Sensor){
+			if(prevSensor != Sensor){
 				Motor_stop();
 				send_data(get_data);
 			}
@@ -117,4 +120,3 @@ int main(void){
 		}
 	}
 }
-//ADD UART Branch
