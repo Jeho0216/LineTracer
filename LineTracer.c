@@ -51,34 +51,34 @@ int main(void){
 		*/
 		switch(Sensor){
 			case 1 :		//Turn left
-			Motor_stop();
-			Motor_1(MotorB);
+//			Motor_stop();
+//			Motor_1(MotorB);
 			break;
 			
 			case 3 :		//Turn left
-			Motor_stop();
-			Motor_1(MotorB);
+//			Motor_stop();
+//			Motor_1(MotorB);
 			break;
 			
 			case 6 :		//Straight
-			Motor_stop();
-			Motor_1(MotorB);
-			Motor_2(MotorB);
+//			Motor_stop();
+//			Motor_1(MotorB);
+//			Motor_2(MotorB);
 			break;
 			
 			case 12 :		//Turn Right
-			Motor_stop();
-			Motor_2(MotorB);
+//			Motor_stop();
+//			Motor_2(MotorB);
 			break;
 			case 8 :		//Turn Right
-			Motor_stop();
-			Motor_2(MotorB);
+//			Motor_stop();
+//			Motor_2(MotorB);
 			break;
 			
 			default :
-			Motor_stop();
-			Motor_1(MotorB);
-			Motor_2(MotorB);
+//			Motor_stop();
+//			Motor_1(MotorB);
+//			Motor_2(MotorB);
 			break;
 		}
 	}
